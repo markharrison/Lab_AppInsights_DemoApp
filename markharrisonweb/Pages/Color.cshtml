@@ -1,0 +1,19 @@
+﻿@page
+@using Microsoft.ApplicationInsights
+@model markharrisonweb.Pages.ColorModel
+@{
+    ViewData["Title"] = "Color";
+
+    string[] strColors = { "red", "blue", "yellow", "green" };
+    Random r = new Random();
+    int rInt = r.Next(strColors.Length);
+    string strRandColor = strColors[rInt];
+
+    var properties = new Dictionary<string, string> { { "Color", strRandColor } };
+    Model.telemetryClient.TrackEvent("ColorEvent", properties, null);
+}
+
+<h1>Color</h1>
+<svg height="200" width="200">
+    <circle cx="100" cy="100" r="95" stroke="black" stroke-width="3" fill="@Html.Raw(strRandColor)" />
+</svg>

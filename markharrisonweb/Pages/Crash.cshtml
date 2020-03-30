@@ -1,0 +1,24 @@
+﻿@page
+@using Microsoft.ApplicationInsights
+@model markharrisonweb.Pages.CrashModel
+@{
+    ViewData["Title"] = "Crash";
+
+    string strError = "error";
+
+    try
+    {
+        int x = 100;
+        x = x / 0;
+    }
+    catch (Exception ex)
+    {
+        // Report the exception to Application Insights.
+        Model.telemetryClient.TrackException(ex);
+
+        strError = ex.ToString();
+    }
+}
+
+<h1>Crash</h1>
+@Html.Raw(strError)

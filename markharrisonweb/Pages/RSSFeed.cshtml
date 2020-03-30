@@ -1,0 +1,28 @@
+﻿@page
+@using System.Text;
+@using System.Net;
+@using System.IO;
+@model markharrisonweb.Pages.RSSFeedModel
+@{
+    ViewData["Title"] = "RSSFeed";
+
+    string RSSFeedURL = "https://feeds.feedburner.com/azure1news";
+    int bufSize = 65536;
+    int length;
+    byte[] buf = new byte[bufSize];
+    StringBuilder sb = new StringBuilder(bufSize);
+
+    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(RSSFeedURL);
+    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+    Stream responseStream = response.GetResponseStream();
+
+    // Read response stream until end
+    while ((length = responseStream.Read(buf, 0, buf.Length)) != 0)
+    {
+        sb.Append(Encoding.UTF8.GetString(buf, 0, length));
+    }
+}
+
+<h1>RSSFeed</h1>
+
+@Html.Raw(sb.ToString())

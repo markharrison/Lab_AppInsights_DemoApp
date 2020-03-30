@@ -1,2 +1,3 @@
 # Lab_AppInsights_DemoApp
-Application Insights - Hands-on Lab Script ... Demo App
+
+Sample App for Hands On Lab at <https://github.com/markharrison/Lab_AppInsights/blob/master/README.md>
